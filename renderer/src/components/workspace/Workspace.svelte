@@ -1,53 +1,82 @@
 <script>
     import Editor from "../editor/Editor.svelte";
     import Renderer from "../renderer/renderer.svelte";
-    import Toolbar from "../toolbar/Toolbar.svelte";
+    import Toggle from "../toolbar/Toggle.svelte";
+    import Tabs from "../toolbar/Tabs.svelte";
 
     import monokai from "@/assets/themes/monokai.json";
     import tomorrowNight from "@/assets/themes/tomorrow-night.json";
-
-    let state = 1;
-    let value = "# test\n```js\nconsole.log('test')\n```";
 
     let editorThemes = [
         { name: "monokai", data: monokai },
         { name: "tomorrow-night", data: tomorrowNight },
     ];
 
+    let viewState = 1;
+    let currentTab = 0;
+    let tabs = [];
+
+    function createTab(tabData) {
+        tabs.push(tabData);
+    }
+
+    createTab({
+        name: "test.md",
+        value: "# test\n```js\nconsole.log('test')\n```",
+    });
+    createTab({
+        name: "test2.md",
+        value: "# test\n```js\nconsole.log('test')\n```",
+    });
+
     function setValue({ detail }) {
-        value = detail.value;
+        console.log(detail.value);
+        tabs[currentTab].value = detail.value;
+
+        console.log(tabs);
     }
 
     function viewUpdate({ detail }) {
-        console.log(detail);
-        state = detail.state;
+        viewState = detail.state;
+    }
+    function tabUpdate({ detail }) {
+        currentTab = detail.activeTab;
     }
 </script>
 
 <div id="workspace">
-    <Toolbar on:viewUpdate={viewUpdate} />
-    <div id="workspace-content">
-        {#if state === 1}
-            <Editor
-                {value}
-                minimap={false}
-                theme="tomorrow-night"
-                themes={editorThemes}
-                on:editorUpdate={setValue}
-            />
-        {:else if state === 2}
-            <Editor
-                {value}
-                minimap={false}
-                theme="tomorrow-night"
-                themes={editorThemes}
-                on:editorUpdate={setValue}
-            />
-            <Renderer />
+    <span class="flex justify-between">
+        <Tabs {tabs} on:tabUpdate={tabUpdate} />
+        <Toggle on:viewUpdate={viewUpdate} />
+    </span>
+    {#key currentTab}
+        {#if tabs.length > 0}
+            <div id="workspace-content">
+                {#if viewState === 1}
+                    <Editor
+                        value={tabs[currentTab].value}
+                        minimap={false}
+                        theme="tomorrow-night"
+                        themes={editorThemes}
+                        on:editorUpdate={setValue}
+                    />
+                {:else if viewState === 2}
+                    <Editor
+                        value={tabs[currentTab].value}
+                        minimap={false}
+                        theme="tomorrow-night"
+                        themes={editorThemes}
+                        on:editorUpdate={setValue}
+                    />
+                    <Renderer value={tabs[currentTab].value} />
+                {:else}
+                    <Renderer value={tabs[currentTab].value} />
+                {/if}
+            </div>
         {:else}
-            <Renderer />
+            <div />
         {/if}
-    </div>
+    {/key}
 </div>
 
 <style>

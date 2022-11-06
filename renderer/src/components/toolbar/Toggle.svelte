@@ -57,6 +57,10 @@
 </div>
 
 <style>
+    .btn-group {
+        align-items: center;
+        border-bottom: 1px #000 solid;
+    }
     input {
         display: none;
     }
