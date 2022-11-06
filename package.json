@@ -28,6 +28,8 @@
   "dependencies": {
     "cross-env": "^7.0.3",
     "daisyui": "^2.38.1",
+    "markdown-it": "^13.0.1",
+    "markdown-it-task-lists": "^2.1.1",
     "monaco-editor": "^0.34.1",
     "monaco-markdown": "^0.0.12"
   }
