@@ -1,0 +1,16 @@
+# OS Specific
+.DS_Store
+
+# Build output
+dist/
+
+# Dependencies
+node_modules/
+
+# Editor
+.idea
+.vscode
+
+# Lock
+yarn.lock
+package.lock
