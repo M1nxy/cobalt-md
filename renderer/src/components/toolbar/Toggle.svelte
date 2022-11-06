@@ -71,4 +71,11 @@
         height: 1em;
         width: 1em;
     }
+    img {
+        filter: invert(1) brightness(0.4);
+        transition: ease 100ms;
+    }
+    img:hover {
+        filter: invert(1) brightness(0.8);
+    }
 </style>

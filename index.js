@@ -6,6 +6,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    frame: false,
   });
 
   if (process.env.NODE_ENV !== 'development') {
