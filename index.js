@@ -14,7 +14,7 @@ function createWindow() {
   } else {
     // Load vite dev server page 
     console.log('Development mode')
-    win.loadURL('http://localhost:3000/')
+    win.loadURL('http://localhost:4500/')
   }
 }
 

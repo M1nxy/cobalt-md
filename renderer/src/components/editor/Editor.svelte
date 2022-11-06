@@ -1,13 +1,14 @@
 <script>
-    import { onMount } from "svelte";
-    import monaco from "./monaco/";
-
+    import { onMount, createEventDispatcher } from "svelte";
     import { MonacoMarkdownExtension } from "monaco-markdown";
+    import monaco from "./monaco/";
 
     export let value = "";
     export let minimap = false;
     export let themes = [];
     export let theme = "vs-light";
+
+    let dispatch = createEventDispatcher();
 
     for (let theme of themes) {
         monaco.editor.defineTheme(theme.name, theme.data);
@@ -24,6 +25,12 @@
             theme: theme,
         });
         new MonacoMarkdownExtension().activate(editor);
+
+        editor.getModel().onDidChangeContent((event) => {
+            dispatch("editorUpdate", {
+                value: editor.getValue(),
+            });
+        });
     });
 </script>
 

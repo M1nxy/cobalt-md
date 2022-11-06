@@ -13,4 +13,8 @@ export default defineConfig({
   },
   root: path.resolve(process.cwd(), 'renderer'),
   base: './',
+  server: {
+    port: 4500,
+    strictPort: true,
+  }
 })
