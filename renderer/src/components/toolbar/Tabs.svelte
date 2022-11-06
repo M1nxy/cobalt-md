@@ -12,7 +12,7 @@
     };
 </script>
 
-<div class="tabs w-full">
+<div class="tabs w-full flex-nowrap">
     {#each tabs as tab, i}
         <!-- svelte-ignore a11y-missing-attribute -->
         <a

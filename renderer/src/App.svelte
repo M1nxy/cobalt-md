@@ -2,7 +2,11 @@
     import Workspace from "./components/workspace/Workspace.svelte";
     import monokai from "@/assets/themes/monokai.json";
     import tomorrowNight from "@/assets/themes/tomorrow-night.json";
-    import { onMount } from "svelte";
+
+    let editorThemes = [
+        { name: "monokai", data: monokai },
+        { name: "tomorrow-night", data: tomorrowNight },
+    ];
 </script>
 
 <main
@@ -10,7 +14,7 @@
     class="flex flex-col w-screen h-screen"
     style=" --editorBackground: {monokai.colors['editor.background']}"
 >
-    <Workspace />
+    <Workspace {editorThemes} />
 </main>
 
 <style>

@@ -4,13 +4,7 @@
     import Toggle from "../toolbar/Toggle.svelte";
     import Tabs from "../toolbar/Tabs.svelte";
 
-    import monokai from "@/assets/themes/monokai.json";
-    import tomorrowNight from "@/assets/themes/tomorrow-night.json";
-
-    let editorThemes = [
-        { name: "monokai", data: monokai },
-        { name: "tomorrow-night", data: tomorrowNight },
-    ];
+    export let editorThemes;
 
     let viewState = 1;
     let currentTab = 0;
