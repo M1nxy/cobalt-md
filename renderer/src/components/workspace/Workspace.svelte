@@ -57,7 +57,11 @@
     </span>
     {#key currentTab}
         {#if tabs.length > 0}
-            <div id="workspace-content" on:keydown={keydown}>
+            <div
+                id="workspace-content"
+                class="overflow-clip"
+                on:keydown={keydown}
+            >
                 {#if viewState === 1}
                     <Editor
                         value={tabs[currentTab].value}
